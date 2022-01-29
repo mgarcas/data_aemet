@@ -1,4 +1,3 @@
-from __future__ import print_function
 import swagger_client
 from swagger_client.rest import ApiException
 from pprint import pprint

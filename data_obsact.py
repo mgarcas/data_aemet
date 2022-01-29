@@ -1,10 +1,8 @@
-from calendar import month
 import swagger_client
 from swagger_client.rest import ApiException
 from pprint import pprint
 import requests
 from urllib.request import urlopen
-import json
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -23,7 +21,7 @@ def plotting_data_obsact():
     print('Month', month)
 
     print(':_:_:_:_:_:_: DATA :_:_:_:_:_:_:')
-    print(df_data_obsact)
+    print(df_data_obsact.info())
 
     df_data_obsact.plot(x='fint', y=['ta', 'tpr', 'pres'], kind='line', grid=True,
                         title='Day {}'.format(day), xlabel='Hour', secondary_y='pres')
