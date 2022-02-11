@@ -37,3 +37,29 @@ except ApiException as e:
 r = requests.get(api_response.to_dict()['datos'])
 data = json.dumps(r.json())
 r.close()
+
+df = pd.read_json(data)
+df.fecha = pd.to_datetime(df['fecha'], format='%Y-%m-%d')
+
+# df = df.apply(pd.to_numeric, errors='ignore')
+# df['column name'] = df['column name'].str.replace('old character','new character')
+# df.tmax = df.tmax.str.replace(",",".").apply(pd.to_numeric)
+# df.tmin = df.tmin.str.replace(",",".").apply(pd.to_numeric)
+# df.tmed = df.tmed.str.replace(",",".").apply(pd.to_numeric)
+# df.presMax = df.presMax.str.replace(",",".").apply(pd.to_numeric)
+# df.presMin = df.presMin.str.replace(",",".").apply(pd.to_numeric)
+
+for col in df.columns.to_list():
+    if type(df[col][0]) == str: 
+        df[col] = df[col].str.replace(",",".").apply(pd.to_numeric, errors='ignore')
+
+print(df.head(20))
+# df.info()
+
+plt.rcParams['figure.dpi'] = 100
+plt.rcParams['figure.figsize'] = (10.0, 5.0)
+df.plot.line(x='fecha',y=['tmax','tmin','tmed'],grid=True, ylabel='Temperature',xlabel='', subplots=False)
+plt.show()
+df.plot.line(x='fecha',y=['presMax','presMin'],grid=True, ylabel='Pressure',xlabel='', subplots=False)
+plt.show()
+
