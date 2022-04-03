@@ -9,7 +9,7 @@ from datetime import datetime
 
 # ::::::::::::::::::: Read data from cvs and plot ::::::::::::::::::
 
-def graph_radiation(m_d):
+def plot_radiation(m_d):
     '''
     returns a graphic of solar radiation UV [J/m2] at Madrid Ciudad Universitaria \n
     m_d -> month and day, like mmdd
@@ -54,6 +54,7 @@ def graph_radiation(m_d):
     print('Day: ', day)
     print('Data plotted: ', 'Radiación Ultravioleta Eritemática')
     print(mad_rad_UVB)
+    plt.savefig('./plot_radiation{}.png'.format(m_d))
     plt.show()
 
 # _=_=_=_=_=_=_= END OF FUNCTIONS =_=_=_=_=_=_=_
@@ -102,4 +103,4 @@ m_d = input('type month and day (mmdd): ')
 if m_d.strip() != '':
     month_day = m_d
 
-graph_radiation(month_day)
+plot_radiation(month_day)
